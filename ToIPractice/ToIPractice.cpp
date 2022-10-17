@@ -22,7 +22,16 @@ bool compareByProb(LetterProbCode& left, const LetterProbCode& right) {
 
 void putCode(std::vector<LetterProbCode>::iterator it, unsigned int numOfElements) {
 
-	if(numOfElements > 1) {
+	if (numOfElements == 3) {
+		std::vector<LetterProbCode>::iterator beginning = it;
+		if (it->prob == it++->prob && it->prob == it++->prob) {
+			beginning->code += "1";
+			beginning++->code += "0";
+			beginning++->code += "0";
+			putCode(beginning - 1, 2);
+		}
+	} 
+	else if(numOfElements > 1) {
 
 		std::vector<LetterProbCode>::iterator firstPart = it;
 		float totalProb = 0;
@@ -148,3 +157,12 @@ int main() {
 	while (std::getchar() != '\n');
 
 }
+
+
+
+// A: 0.3
+// B: 0.3
+// C: 0.3
+
+// A, B -> 1
+// C -> 0
